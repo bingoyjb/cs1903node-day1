@@ -211,11 +211,11 @@ map.clear()
   var proxy = new Proxy(obj,{
     // target 是原来的对象  key是 获取键  
     get(target,key){
-      return target[key].repalce('2018','2019')
+      return target[key].replace('2018','2019')
     },
     // target 是原来的对象  key是 获取键  val 修改的值 
     set(target,key,val){
-      if(key == 'name'){
+      if(key === 'name'){
         return target[key] = val  
       }else {
         return target[key] 
