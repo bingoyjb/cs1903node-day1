@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input name="abc" type="text">
+    <button id="btn">搜索</button>
+    <ul id="ullist">
+
+    </ul>
+    <script>
+        //1.先模拟后台数据
+        var arr = [{
+                id: 1,
+                uname: "宝马"
+            },
+            {
+                id: 2,
+                uname: "奔驰"
+            },
+            {
+                id: 3,
+                uname: "宝俊"
+            }
+        ]
+        //2.将数据渲染的页面
+        var html = ""
+        arr.forEach((el) => {
+            html += `
+            <li>
+            <p>${el.id}</p>
+            <p>${el.uname}</p>
+            </li>`
+        })
+        document.querySelector("#ullist").innerHTML = html
+
+        //3.封装一个查找的函数
+        function search(keyword) {
+            var newArr = []
+            arr.forEach((el) => {
+                if (el.uname.includes(keyword)||el.id.toString().includes(keyword)) {//因为输入框输入的是字符串 所以要不数据id转出字符串
+                    newArr.push(el)
+                }
+            })
+            return newArr
+        }
+        // console.log(search("宝"))  验证函数是否可以执行
+
+        //4.把搜所到的值渲染页面
+        document.querySelector("#btn").onclick = function () {
+            var newa = document.querySelector('[name="abc"]').value//点击时获取到input框的值  //这个输入的值就相当于是我封装函数里的形参keyword
+            search(newa)//再载调用搜索函数 
+            var html = ""//再把搜索到的函数渲染页面
+            search(newa).forEach((el) => {//遍历搜索到的值有的话就变成一个新的数组输出
+                html += `
+            <li>
+            <p>${el.id}</p>
+            <p>${el.uname}</p>
+            </li>`
+            })
+            document.querySelector("#ullist").innerHTML = html
+        }
+    </script>
+</body>
+
+</html>

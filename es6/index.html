@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  xiug  sifjslfj l
+  <input type="text" name="keyword">
+  <button id="btn">serch</button>
+
+  <ul id="ullist">
+
+  </ul>
+
+  <script>
+
+    // 1.0 模拟后台数据
+    let arr = [
+      {
+        id: 0,
+        name: '了宝马'
+      },
+      {
+        id: 1,
+        name: '宝骏'
+      },
+      {
+        id: 2,
+        name: '路虎'
+      }
+    ]
+
+    // 2.0  遍历拼接数据 
+    let html = ''
+    arr.forEach(function (item) {
+      html += `
+        <li>
+          <span>${item.id}</span>
+          <span>${item.name}</span>
+        </li>
+      `
+    })
+    document.querySelector('#ullist').innerHTML = html
+
+    // 3.0 过滤数据  
+    function search(keyword) {
+
+      // var newArr = []
+      // 没有返回值 
+      // arr.forEach(function (item) {
+      //   if (item.name.includes(keyword)) newArr.push(item)
+      // })
+
+      // 有返回值 返回一个新的数组
+      return arr.filter(function (item) {
+        if (item.name.includes(keyword)) return item
+      })
+
+    }
+
+    // 4.0 输入关键词搜索响应的内容
+    document.querySelector('#btn').onclick = function () {
+      let keyword = document.querySelector('[name="keyword"]').value
+      let newArr = search(keyword)
+      let html = ''
+      newArr.forEach(function (item) {
+        html += `
+        <li>
+          <span>${item.id}</span>
+          <span>${item.name}</span>
+        </li>
+      `
+      })
+      document.querySelector('#ullist').innerHTML = html
+    }
+
+  </script>
+</body>
+
+</html>
